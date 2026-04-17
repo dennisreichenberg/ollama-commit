@@ -24,7 +24,15 @@ err = Console(stderr=True)
 @click.option("--hint", "-h", default=None, help="Optional context hint for the model.")
 @click.option("--yes", "-y", is_flag=True, help="Auto-accept the first suggestion and commit.")
 @click.option("--dry-run", is_flag=True, help="Print message but do not commit.")
-def main(ctx: click.Context, model: str, host: str, count: int, hint: str | None, yes: bool, dry_run: bool) -> None:
+def main(  # noqa: PLR0913
+    ctx: click.Context,
+    model: str,
+    host: str,
+    count: int,
+    hint: str | None,
+    yes: bool,
+    dry_run: bool,
+) -> None:
     """Generate a Git commit message using a local Ollama LLM.
 
     Run inside a git repository with staged changes.
@@ -48,10 +56,13 @@ def main(ctx: click.Context, model: str, host: str, count: int, hint: str | None
         sys.exit(1)
 
     if not diff_info.staged_files:
-        err.print("[yellow]No staged changes found.[/yellow] Stage your changes with `git add` first.")
+        err.print(
+            "[yellow]No staged changes found.[/yellow] Stage your changes with `git add` first."
+        )
         sys.exit(1)
 
-    console.print(f"[dim]Staged files ({len(diff_info.staged_files)}):[/dim] " + ", ".join(diff_info.staged_files))
+    files_str = ", ".join(diff_info.staged_files)
+    console.print(f"[dim]Staged files ({len(diff_info.staged_files)}):[/dim] {files_str}")
     console.print(f"[dim]Querying[/dim] [bold cyan]{model}[/bold cyan] [dim]via[/dim] {host}...\n")
 
     # 2. Generate suggestions
@@ -75,10 +86,15 @@ def main(ctx: click.Context, model: str, host: str, count: int, hint: str | None
     # 3. Present suggestions
     if count == 1 or yes:
         chosen = suggestions[0]
-        console.print(Panel(Text(chosen, style="bold white"), title="Suggested commit message", border_style="green"))
+        panel = Panel(
+            Text(chosen, style="bold white"), title="Suggested commit message", border_style="green"
+        )
+        console.print(panel)
     else:
         for i, msg in enumerate(suggestions, 1):
-            console.print(Panel(Text(msg, style="bold white"), title=f"Option {i}", border_style="cyan"))
+            console.print(
+                Panel(Text(msg, style="bold white"), title=f"Option {i}", border_style="cyan")
+            )
 
         choice_str = Prompt.ask(
             "Pick a suggestion",

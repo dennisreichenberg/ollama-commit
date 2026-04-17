@@ -1,6 +1,5 @@
 """Git prepare-commit-msg hook installer."""
 
-import os
 import stat
 import sys
 from pathlib import Path
