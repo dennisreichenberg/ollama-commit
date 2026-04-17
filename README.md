@@ -1,5 +1,10 @@
 # ollama-commit
 
+[![PyPI version](https://img.shields.io/pypi/v/ollama-commit)](https://pypi.org/project/ollama-commit/)
+[![CI](https://github.com/dennisreichenberg/ollama-commit/actions/workflows/ci.yml/badge.svg)](https://github.com/dennisreichenberg/ollama-commit/actions/workflows/ci.yml)
+[![Python versions](https://img.shields.io/pypi/pyversions/ollama-commit)](https://pypi.org/project/ollama-commit/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > Generate Git commit messages using local LLMs via [Ollama](https://ollama.com) — no cloud, no API keys, no data leaving your machine.
 
 ```
