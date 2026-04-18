@@ -3,12 +3,10 @@
 from unittest.mock import MagicMock, patch
 
 import httpx
-import pytest
 from click.testing import CliRunner
 
 from ollama_commit.cli import main
 from ollama_commit.git import DiffInfo, GitError
-
 
 _SENTINEL = object()
 
@@ -155,7 +153,7 @@ class TestInstallHookCommand:
     def test_install_hook_called(self):
         runner = CliRunner()
         with patch("ollama_commit.hook.install_hook") as mock_install:
-            result = runner.invoke(main, ["install-hook"])
+            runner.invoke(main, ["install-hook"])
         mock_install.assert_called_once_with(force=False)
 
     def test_install_hook_with_force(self):

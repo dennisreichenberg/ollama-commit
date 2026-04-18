@@ -2,8 +2,6 @@
 
 from unittest.mock import MagicMock, patch
 
-import pytest
-
 from ollama_commit.ollama import _build_prompt, generate_messages, list_models
 
 

@@ -1,7 +1,7 @@
 """Tests for git.py - staged diff and commit operations."""
 
 import subprocess
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
